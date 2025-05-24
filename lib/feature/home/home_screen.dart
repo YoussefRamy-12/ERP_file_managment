@@ -1,5 +1,6 @@
+import 'package:file_manager/core/widgets/build_files_view.dart';
 import 'package:file_manager/core/widgets/floating_button.dart';
-import 'package:file_manager/core/widgets/floating_item.dart';
+import 'package:file_manager/core/widgets/search.dart';
 import 'package:file_manager/feature/files&folders/files_data.dart';
 import 'package:file_manager/feature/files&folders/folders_data.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingButton(context: context),
       backgroundColor: MyColors.mainBackGround,
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -54,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 40.h),
-            _buildSearchBar(),
+            SearchWidget(),
             SizedBox(height: 20.h),
             Row(
               children: [
@@ -63,7 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      isGridView = !isGridView; // Toggle between list and grid view
+                      isGridView =
+                          !isGridView; // Toggle between list and grid view
                     });
                   },
                   icon: Icon(isGridView ? Icons.list : Icons.grid_view),
@@ -74,43 +77,12 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildFolders(),
             SizedBox(height: 20.h),
             Expanded(
-              child: isGridView ? _buildFilesGrid() : _buildFilesList(),
+              child: buildFilesView(isGridView,
+                  files), // Use the buildFilesView function to display files
             ), // Ensure files list doesn't overflow
-            FloatingButton(context: context),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: "Search in App",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(width: 10.w),
-        AppIconBtn(
-          icon: Icon(Icons.more_vert),
-          onPressed: () {},
-          backGroundColor: Colors.transparent,
-          borderColor: Colors.grey,
-          buttonWidth: 40.w,
-          buttonHeight: 40.h,
-          verticalPadding: 0,
-          horizontalPadding: 0,
-          borderRadius: 13,
-        ),
-      ],
     );
   }
 
@@ -165,74 +137,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildFilesList() {
-    return ListView.separated(
-      itemCount: files.length,
-      separatorBuilder: (_, __) => SizedBox(height: 10.h),
-      itemBuilder: (context, index) {
-        final file = files[index];
-        return _buildFileItem(file);
-      },
-    );
-  }
-
-  Widget _buildFilesGrid() {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Number of columns in the grid
-        crossAxisSpacing: 10.w,
-        mainAxisSpacing: 10.h,
-        childAspectRatio: 3 / 1.3, // Adjust the aspect ratio as needed
-      ),
-      itemCount: files.length,
-      itemBuilder: (context, index) {
-        final file = files[index];
-        return _buildFileItem(file);
-      },
-    );
-  }
-
-  Widget _buildFileItem(FileItem file) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.r),
-      ),
-      child: Row(
-        children: [
-          Icon(file.icon, size: 40, color: Colors.orange),
-          SizedBox(width: 10.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  file.name,
-                  style: MyTextStyle.font14Bold(context),
-                  overflow: TextOverflow.ellipsis, // Prevent text overflow
-                ),
-                Text(
-                  file.date,
-                  style: MyTextStyle.font12RegularGrey(context),
-                  overflow: TextOverflow.ellipsis, // Prevent text overflow
-                ),
-                Text(
-                  file.size,
-                  style: MyTextStyle.font12RegularGrey(context),
-                  overflow: TextOverflow.ellipsis, // Prevent text overflow
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
-
-
-
-
-
 

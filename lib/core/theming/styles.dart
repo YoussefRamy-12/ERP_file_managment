@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:file_manager/core/theming/colors.dart';
 
 class MyTextStyle {
-  static TextStyle font16SemiBold(BuildContext context) {
+  static TextStyle font16SemiBold(BuildContext context, [Color? textColor]) {
     return TextStyle(
         fontSize: 16.sp,
         fontFamily: "Poppins",
         fontWeight: FontWeight.w600,
-        color: MyColors.myBlack);
+        color: textColor??MyColors.myBlack);
   }
 
   static TextStyle font16Regular(BuildContext context, [Color? textColor]) {

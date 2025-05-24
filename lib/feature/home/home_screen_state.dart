@@ -4,7 +4,7 @@ import 'package:file_manager/core/theming/colors.dart';
 import 'package:file_manager/core/theming/styles.dart';
 import 'package:file_manager/feature/home/account/account_screen.dart';
 import 'package:file_manager/feature/home/home_screen.dart';
-import 'package:file_manager/feature/home/statistics_screen.dart';
+import 'package:file_manager/feature/home/files_screen.dart';
 
 class HomeScreenState extends StatefulWidget {
   const HomeScreenState({super.key});
@@ -23,7 +23,7 @@ class _HomeScreenStateState extends State<HomeScreenState> {
 
   final List<Widget> screens = [
     HomeScreen(),
-    StatisticsScreen(),
+    FilesScreen(),
     AccountScreen(),
   ];
 
@@ -38,7 +38,7 @@ class _HomeScreenStateState extends State<HomeScreenState> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: MyColors.myLightGreen, // Selected icon color
+        selectedItemColor: MyColors.mainBlue, // Selected icon color
         unselectedItemColor: Colors.grey, // Unselected icon color
         showSelectedLabels: true,
         showUnselectedLabels: true,
@@ -49,7 +49,7 @@ class _HomeScreenStateState extends State<HomeScreenState> {
             MyTextStyle.font14SemiBold(context, MyColors.myLightGreen),
         unselectedLabelStyle: MyTextStyle.font11SemiBold(context, Colors.grey),
         selectedIconTheme: IconThemeData(
-          color: MyColors.myLightGreen, // Selected icon color
+          color: MyColors.mainBlue, // Selected icon color
           size: 30.sp, // Adjust icon size
         ),
         items: const <BottomNavigationBarItem>[
@@ -62,7 +62,7 @@ class _HomeScreenStateState extends State<HomeScreenState> {
             label: 'Files',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_3_outlined),
+            icon: Icon(Icons.person_outlined),
             label: 'Profile',
           ),
         ],

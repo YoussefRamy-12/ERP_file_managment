@@ -1,3 +1,4 @@
+import 'package:file_manager/feature/home/account/used_space_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:file_manager/core/theming/colors.dart';
@@ -15,7 +16,7 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.mainBackGround,
+      backgroundColor: MyColors.myWhite,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -96,7 +97,7 @@ class _AccountScreenState extends State<AccountScreen> {
             SizedBox(height: 30.h),
             _buildListTile(
               context,
-              icon: Icons.person,
+              icon: Icons.person_outline,
               title: "My Account",
               onTap: () {
                 // Handle My Account tap
@@ -107,23 +108,35 @@ class _AccountScreenState extends State<AccountScreen> {
             SizedBox(height: 10.h),
             _buildListTile(
               context,
-              icon: Icons.privacy_tip,
-              title: "Privacy & Policy",
+              icon: Icons.pie_chart_outline,
+              title: "Used Space",
               onTap: () {
-                // Handle Privacy & Policy tap
+                // Handle Used Space tap
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UsedSpaceScreen()),
+                );
               },
             ),
             SizedBox(height: 10.h),
             _buildListTile(
               context,
-              icon: Icons.help,
-              title: "Help & Center",
+              icon: Icons.help_outline,
+              title: "Help",
               onTap: () {
                 // Handle Help & Center tap
               },
             ),
             SizedBox(height: 10.h),
-            _buildDarkModeToggle(context),
+            _buildListTile(
+              context,
+              icon: Icons.logout_outlined,
+              title: "Logout",
+              onTap: () {
+                // Handle Logout tap
+              },
+            ),
           ],
         ),
       ),
@@ -135,38 +148,24 @@ class _AccountScreenState extends State<AccountScreen> {
       required String title,
       required VoidCallback onTap}) {
     return ListTile(
-      leading: Icon(icon, color: Colors.black),
+
+      leading: Icon(icon,
+          color: icon == Icons.logout_outlined ? Colors.red : Colors.blue,
+          size: 24.r),
       title: Text(
         title,
         style: TextStyle(fontSize: 16.sp, color: Colors.black),
       ),
-      trailing: const Icon(Icons.arrow_forward_ios, color: Colors.grey),
+      trailing: icon == Icons.logout_outlined
+          ? null
+          : const Icon(Icons.arrow_forward_ios, color: Colors.grey),
       onTap: onTap,
       tileColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.r),
+        side: BorderSide(color: Colors.grey.shade300, width: 1.w),
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
-    );
-  }
-
-  Widget _buildDarkModeToggle(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.dark_mode, color: Colors.black),
-      title: Text(
-        "Darkmode",
-        style: TextStyle(fontSize: 16.sp, color: Colors.black),
-      ),
-      trailing: Switch(
-        value: false, // Replace with your dark mode state
-        onChanged: (value) {
-          // Handle dark mode toggle
-        },
-      ),
-      tileColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.r),
-      ),
     );
   }
 }

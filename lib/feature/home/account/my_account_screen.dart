@@ -18,7 +18,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.mainBackGround,
+      backgroundColor: MyColors.myWhite,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -56,7 +56,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     right: 10.w,
                     child: CircleAvatar(
                       radius: 15.r,
-                      backgroundColor: MyColors.myLightGreen,
+                      backgroundColor: MyColors.mainBlue,
                       child: Icon(
                         Icons.edit,
                         size: 15.r,
@@ -95,8 +95,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               SizedBox(height: 30.h),
               AppTextBtn(
                 buttonText: "Update Information",
-                backGroundColor: MyColors.myLightGreen,
-                textStyle: MyTextStyle.font16SemiBold(context),
+                backGroundColor: MyColors.mainBlue,
+                textStyle: MyTextStyle.font16SemiBold(context, Colors.white),
                 borderRadius: 10.r,
                 buttonWidth: 400.w,
                 onPressed: () {
@@ -119,15 +119,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   label,
-        //   style: TextStyle(fontSize: 14.sp, color: Colors.grey),
-        // ),
         SizedBox(height: 5.h),
         TextField(
             decoration: InputDecoration(
             floatingLabelStyle: TextStyle(
-              color: MyColors.myLightGreen,
+              color: MyColors.mainBlue,
               fontSize: 18.sp,
             ),
             labelText: label,
@@ -179,30 +175,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
             fillColor: Colors.grey[200],
             ),
           obscureText: PasswordVisible ?? isPassword,
-          // decoration: InputDecoration(
-          //   hintText: hintText,
-          //   suffixIcon: isPassword
-          //     ? IconButton(
-          //       icon: Icon(
-          //         PasswordVisible??_isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-          //         color: Colors.grey,
-          //       ),
-          //       onPressed: () {
-          //         setState(() {
-          //           if (label == "Password") {
-          //           _isPasswordVisible = !_isPasswordVisible;
-          //           } else if (label == "Repeat Password") {
-          //           _isConfirmationPasswordVisible = !_isConfirmationPasswordVisible;
-          //           }
-          //         });
-          //       },
-          //       )
-          //     : null,
-          //   border: InputBorder.none,
-          //   filled: true,
-          //   fillColor: Colors.grey[200],
-          // ),
-        ),
+          ),
       ],
     );
   }
